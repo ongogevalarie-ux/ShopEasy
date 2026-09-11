@@ -206,24 +206,29 @@ categoryButtons.forEach(button => {
 // Filter products
 function filterProducts() {
 
-    const searchText = searchInput.value.toLowerCase();
+    const searchText = searchInput.value.toLowerCase().trim();
 
     productCards.forEach(card => {
 
-        const productName = card.querySelector("h3").textContent.toLowerCase();
-        const productCategory = card.dataset.category;
+        const productName =
+            card.querySelector("h3").textContent.toLowerCase();
 
-        const matchesSearch = productName.includes(searchText);
+        const productCategory =
+            card.dataset.category.toLowerCase();
+
+        const matchesSearch =
+            productName.includes(searchText);
 
         const matchesCategory =
             selectedCategory === "all" ||
             productCategory === selectedCategory;
 
         if (matchesSearch && matchesCategory) {
-            card.style.display = "block";
+            card.classList.remove("hidden-product");
         } else {
-            card.style.display = "none";
+            card.classList.add("hidden-product");
         }
+
     });
 }
 // ===============================
@@ -374,6 +379,36 @@ const backToCart =
 const checkoutButton =
     document.getElementById("checkout-btn");
 
+const confirmationSection =
+    document.getElementById("order-confirmation");
+
+const confirmationItems =
+    document.getElementById("confirmation-items");
+
+const confirmationSubtotal =
+    document.getElementById("confirmation-subtotal");
+
+const confirmationDelivery =
+    document.getElementById("confirmation-delivery");
+
+const confirmationTotal =
+    document.getElementById("confirmation-total");
+
+const confirmationName =
+    document.getElementById("confirmation-name");
+
+const confirmationEmail =
+    document.getElementById("confirmation-email");
+
+const confirmationPayment =
+    document.getElementById("confirmation-payment");
+
+const orderNumber =
+    document.getElementById("order-number");
+
+const continueShopping =
+    document.getElementById("continue-shopping");
+
 
 // Open checkout
 
@@ -472,40 +507,153 @@ backToCart.addEventListener("click", () => {
     });
 
 });
+
 checkoutForm.addEventListener("submit", (event) => {
 
     event.preventDefault();
 
-    const name =
+    const customerName =
         document.getElementById("customer-name").value;
+
+    const customerEmail =
+        document.getElementById("customer-email").value;
 
     const paymentMethod =
         document.querySelector(
             'input[name="payment"]:checked'
         ).value;
 
-    alert(
-        `Thank you, ${name}!\n\n` +
-        `Your order has been placed successfully.\n` +
-        `Payment method: ${paymentMethod}`
-    );
+
+    // Calculate order totals
+
+    let subtotal = 0;
+
+    cart.forEach(product => {
+        subtotal += product.price * product.quantity;
+    });
+
+    const delivery = subtotal >= 500 ? 0 : 10;
+
+    const total = subtotal + delivery;
+
+
+    // Generate order number
+
+    const generatedOrderNumber =
+        "SE-" + Date.now().toString().slice(-6);
+
+
+    // Display customer information
+
+    confirmationName.textContent = customerName;
+    confirmationEmail.textContent = customerEmail;
+    confirmationPayment.textContent = paymentMethod;
+
+    orderNumber.textContent = generatedOrderNumber;
+
+
+    // Display ordered products
+
+    confirmationItems.innerHTML = "";
+
+    cart.forEach(product => {
+
+        const itemTotal =
+            product.price * product.quantity;
+
+        confirmationItems.innerHTML += `
+            <div class="confirmation-item">
+
+                <span class="confirmation-item-name">
+                    ${product.name} × ${product.quantity}
+                </span>
+
+                <span class="confirmation-item-price">
+                    $${itemTotal.toFixed(2)}
+                </span>
+
+            </div>
+        `;
+    });
+
+
+    // Display totals
+
+    confirmationSubtotal.textContent =
+        `$${subtotal.toFixed(2)}`;
+
+    confirmationDelivery.textContent =
+        delivery === 0
+            ? "FREE"
+            : `$${delivery.toFixed(2)}`;
+
+    confirmationTotal.textContent =
+        `$${total.toFixed(2)}`;
+
+
+    // Hide checkout
+
+    checkoutSection.classList.add("hidden");
+
+
+    // Show confirmation
+
+    confirmationSection.classList.remove("hidden");
+
 
     // Clear cart
+
     cart = [];
 
     localStorage.removeItem("cart");
 
     updateCart();
 
+
+    // Reset form
+
     checkoutForm.reset();
 
-    checkoutSection.classList.add("hidden");
 
-    document.getElementById("cart").style.display = "block";
+    // Scroll to confirmation
 
     window.scrollTo({
-        top: document.getElementById("cart").offsetTop,
+        top: confirmationSection.offsetTop,
         behavior: "smooth"
+    });
+
+});
+
+continueShopping.addEventListener("click", () => {
+
+    confirmationSection.classList.add("hidden");
+
+    productsSection.style.display = "block";
+
+    window.scrollTo({
+        top: productsSection.offsetTop,
+        behavior: "smooth"
+    });
+
+});
+// ===============================
+// MOBILE NAVIGATION
+// ===============================
+
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+
+menuToggle.addEventListener("click", () => {
+
+    navLinks.classList.toggle("show");
+
+});
+document.querySelectorAll(".nav-links a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navLinks.classList.remove("show");
+
     });
 
 });
