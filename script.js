@@ -6,6 +6,8 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const cartItems = document.getElementById("cart-items");
 const cartCount = document.getElementById("cart-count");
 const cartTotal = document.getElementById("cart-total");
+const cartSubtotal = document.getElementById("cart-subtotal");
+const deliveryFee = document.getElementById("delivery-fee");
 const addToCartButtons = document.querySelectorAll(".add-to-cart");
 
 
@@ -46,103 +48,86 @@ addToCartButtons.forEach(button => {
 // Update cart
 function updateCart() {
 
-    // Save cart to Local Storage
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
+    localStorage.setItem("cart", JSON.stringify(cart));
 
     cartItems.innerHTML = "";
 
-    let total = 0;
+    let subtotal = 0;
     let totalItems = 0;
 
-
-    // Check if cart is empty
     if (cart.length === 0) {
 
-        cartItems.innerHTML =
-            "<p>Your cart is empty.</p>";
-
-    }
-
-
-    // Display cart items
-    cart.forEach((item, index) => {
-
-        const itemTotal =
-            item.price * item.quantity;
-
-        total += itemTotal;
-
-        totalItems += item.quantity;
-
-
-        const cartItem =
-            document.createElement("div");
-
-        cartItem.classList.add("cart-item");
-
-
-        cartItem.innerHTML = `
-
-            <div class="cart-product">
-
-                <strong>${item.name}</strong>
-
-                <p>$${item.price}</p>
-
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                <h3>Your cart is empty</h3>
+                <p>Add some products to your cart to get started.</p>
             </div>
-
-
-            <div class="cart-controls">
-
-                <button onclick="decreaseQuantity(${index})">
-                    −
-                </button>
-
-                <span>
-                    ${item.quantity}
-                </span>
-
-                <button onclick="increaseQuantity(${index})">
-                    +
-                </button>
-
-            </div>
-
-
-            <div class="cart-price">
-
-                $${itemTotal}
-
-            </div>
-
-
-            <button
-                class="remove-btn"
-                onclick="removeItem(${index})">
-
-                🗑️
-
-            </button>
-
         `;
 
+        cartSubtotal.textContent = "$0.00";
+        deliveryFee.textContent = "$0.00";
+        cartTotal.textContent = "$0.00";
+        cartCount.textContent = "0";
 
-        cartItems.appendChild(cartItem);
+        return;
+    }
 
+    cart.forEach((product, index) => {
+
+        const itemTotal = product.price * product.quantity;
+
+        subtotal += itemTotal;
+        totalItems += product.quantity;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+
+                <div class="cart-product">
+                    <h3>${product.name}</h3>
+                    <p>$${product.price.toFixed(2)} each</p>
+                </div>
+
+                <div class="cart-controls">
+
+                    <button onclick="decreaseQuantity(${index})">
+                        −
+                    </button>
+
+                    <span>${product.quantity}</span>
+
+                    <button onclick="increaseQuantity(${index})">
+                        +
+                    </button>
+
+                </div>
+
+                <div class="cart-price">
+                    $${itemTotal.toFixed(2)}
+                </div>
+
+                <button 
+                    class="remove-btn"
+                    onclick="removeItem(${index})">
+                    Remove
+                </button>
+
+            </div>
+        `;
     });
 
+    // Delivery fee
+    const delivery = subtotal >= 500 ? 0 : 10;
 
-    // Update cart counter
+    const total = subtotal + delivery;
+
+    cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+
+    deliveryFee.textContent =
+        delivery === 0 ? "FREE" : `$${delivery.toFixed(2)}`;
+
+    cartTotal.textContent = `$${total.toFixed(2)}`;
+
     cartCount.textContent = totalItems;
-
-
-    // Update total price
-    cartTotal.textContent = total;
-
 }
 
 
@@ -362,6 +347,164 @@ backToProducts.addEventListener("click", () => {
 
     window.scrollTo({
         top: productsSection.offsetTop,
+        behavior: "smooth"
+    });
+
+});
+// ===============================
+// CHECKOUT
+// ===============================
+
+const checkoutSection = document.getElementById("checkout");
+const checkoutForm = document.getElementById("checkout-form");
+const checkoutItems = document.getElementById("checkout-items");
+
+const checkoutSubtotal =
+    document.getElementById("checkout-subtotal");
+
+const checkoutDelivery =
+    document.getElementById("checkout-delivery");
+
+const checkoutTotal =
+    document.getElementById("checkout-total");
+
+const backToCart =
+    document.getElementById("back-to-cart");
+
+const checkoutButton =
+    document.getElementById("checkout-btn");
+
+
+// Open checkout
+
+checkoutButton.addEventListener("click", () => {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty. Add a product first.");
+
+        return;
+    }
+
+    showCheckout();
+
+});
+
+
+// Display checkout
+
+function showCheckout() {
+
+    document.getElementById("cart").style.display = "none";
+
+    checkoutSection.classList.remove("hidden");
+
+    renderCheckout();
+
+    window.scrollTo({
+        top: checkoutSection.offsetTop,
+        behavior: "smooth"
+    });
+
+}
+
+
+// Render order summary
+
+function renderCheckout() {
+
+    checkoutItems.innerHTML = "";
+
+    let subtotal = 0;
+
+    cart.forEach(product => {
+
+        const itemTotal =
+            product.price * product.quantity;
+
+        subtotal += itemTotal;
+
+        checkoutItems.innerHTML += `
+            <div class="checkout-item">
+
+                <span class="checkout-item-name">
+                    ${product.name} × ${product.quantity}
+                </span>
+
+                <span class="checkout-item-price">
+                    $${itemTotal.toFixed(2)}
+                </span>
+
+            </div>
+        `;
+
+    });
+
+    const delivery = subtotal >= 500 ? 0 : 10;
+
+    const total = subtotal + delivery;
+
+    checkoutSubtotal.textContent =
+        `$${subtotal.toFixed(2)}`;
+
+    checkoutDelivery.textContent =
+        delivery === 0
+            ? "FREE"
+            : `$${delivery.toFixed(2)}`;
+
+    checkoutTotal.textContent =
+        `$${total.toFixed(2)}`;
+
+}
+
+
+// Back to cart
+
+backToCart.addEventListener("click", () => {
+
+    checkoutSection.classList.add("hidden");
+
+    document.getElementById("cart").style.display = "block";
+
+    window.scrollTo({
+        top: document.getElementById("cart").offsetTop,
+        behavior: "smooth"
+    });
+
+});
+checkoutForm.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("customer-name").value;
+
+    const paymentMethod =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        ).value;
+
+    alert(
+        `Thank you, ${name}!\n\n` +
+        `Your order has been placed successfully.\n` +
+        `Payment method: ${paymentMethod}`
+    );
+
+    // Clear cart
+    cart = [];
+
+    localStorage.removeItem("cart");
+
+    updateCart();
+
+    checkoutForm.reset();
+
+    checkoutSection.classList.add("hidden");
+
+    document.getElementById("cart").style.display = "block";
+
+    window.scrollTo({
+        top: document.getElementById("cart").offsetTop,
         behavior: "smooth"
     });
 
