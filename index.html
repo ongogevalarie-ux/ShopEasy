@@ -52,19 +52,25 @@
 
         <h2>Featured Products</h2>
 
-    <div class="categories">
+<div class="search-container">
+    <input 
+        type="text" 
+        id="search-input" 
+        placeholder="Search for a product..."
+    >
+</div>
 
-        <button>All</button>
-        <button>Electronics</button>
-        <button>Computers</button>
-        <button>Accessories</button>
-
-    </div>
+<div class="categories">
+    <button class="category-btn active" data-category="all">All</button>
+    <button class="category-btn" data-category="electronics">Electronics</button>
+    <button class="category-btn" data-category="computers">Computers</button>
+    <button class="category-btn" data-category="accessories">Accessories</button>
+</div>
 
         <div class="products-container">
 
             <!-- Product 1 -->
-            <div class="product-card">
+            <div class="product-card" data-category="electronics">
 
                 <div class="product-image">
                     <img src="images/smartphone.avif" alt="Smartphone">
@@ -73,6 +79,16 @@
                 <h3>Smartphone</h3>
 
                 <p class="price">$300</p>
+
+            <button 
+                class="view-details"
+                data-name="Smartphone"
+                data-price="300"
+                data-category="Electronics"
+                data-image="images/smartphone.avif"
+                data-description="A modern smartphone with excellent performance, a high-quality display and useful everyday features.">
+                     View Details
+             </button>   
 
                 <button class="add-to-cart"
                     data-name="Smartphone"
@@ -86,7 +102,7 @@
 
 
             <!-- Product 2 -->
-            <div class="product-card">
+            <div class="product-card" data-category="accessories">
 
                 <div class="product-image">
                     <img src="images/headphones.avif" alt="Headphones">
@@ -108,7 +124,7 @@
 
 
             <!-- Product 3 -->
-            <div class="product-card">
+            <div class="product-card" data-category="computers">
 
                 <div class="product-image">
                     <img src="images/laptop.avif" alt="Laptop">
@@ -117,6 +133,16 @@
                 <h3>Laptop</h3>
 
                 <p class="price">$700</p>
+
+                <button 
+                    class="view-details"
+                    data-name="Laptop"
+                    data-price="700"
+                    data-category="Computers"
+                    data-image="images/laptop.avif"
+                    data-description="A powerful laptop suitable for studying, work, browsing and everyday computing.">
+                    View Details
+                </button>
 
                 <button class="add-to-cart"
                     data-name="Laptop"
@@ -130,7 +156,7 @@
 
 
             <!-- Product 4 -->
-            <div class="product-card">
+            <div class="product-card" data-category="accessories">
 
                 <div class="product-image">
                     <img src="images/smartwatch.avif" alt="Smart Watch">
@@ -153,6 +179,46 @@
         </div>
 
     </section>
+
+    <!-- Product Details section  -->
+     
+     <section id="product-details" class="product-details hidden">
+
+    <button id="back-to-products" class="back-btn">
+        ← Back to Products
+    </button>
+
+    <div class="details-container">
+
+        <div class="details-image">
+            <img id="details-image" src="" alt="Product">
+        </div>
+
+        <div class="details-info">
+
+            <p id="details-category" class="details-category"></p>
+
+            <h2 id="details-name"></h2>
+
+            <p id="details-price" class="details-price"></p>
+
+            <p id="details-description"></p>
+
+            <div class="quantity-selector">
+                <button id="details-minus">−</button>
+                <span id="details-quantity">1</span>
+                <button id="details-plus">+</button>
+            </div>
+
+            <button id="details-add-cart" class="details-cart-btn">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
 
 
     <!-- Cart Section -->
