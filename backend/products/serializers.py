@@ -87,6 +87,24 @@ class OrderItemSerializer(
 class OrderSerializer(
     serializers.ModelSerializer
 ):
+    user = serializers.PrimaryKeyRelatedField(
+    read_only=True
+)
+    fields = [
+    'id',
+    'user',
+    'customer_name',
+    'customer_email',
+    'customer_phone',
+    'delivery_address',
+    'payment_method',
+    'subtotal',
+    'delivery_fee',
+    'total',
+    'status',
+    'items',
+    'created_at',
+]
 
     items = OrderItemSerializer(
         many=True

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -46,6 +47,14 @@ class Product(models.Model):
 # ========================================
 
 class Order(models.Model):
+
+    user = models.ForeignKey(
+    User,
+    on_delete=models.SET_NULL,
+    null=True,
+    blank=True,
+    related_name='orders'
+)
 
     PAYMENT_CHOICES = [
         ('mpesa', 'M-Pesa'),
