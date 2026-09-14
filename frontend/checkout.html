@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEasy | Checkout</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            ShopEasy
+        </a>
+
+        <div class="nav-container">
+
+            <button id="menu-toggle"
+                    class="menu-toggle"
+                    type="button">
+                ☰
+            </button>
+
+            <div id="nav-links" class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="cart.html" id="cart-link">
+                Cart 
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count">0</span>
+            </a>
+
+                <div class="auth-links">
+
+                    <button id="login-btn"
+                            class="login-btn"
+                            type="button">
+                        Login
+                    </button>
+
+                    <button id="register-btn"
+                            class="register-btn"
+                            type="button">
+                        Register
+                    </button>
+
+                    <a href="my-orders.html"
+                       id="my-orders-btn"
+                       class="my-orders-btn hidden">
+                        My Orders
+                    </a>
+
+                    <span id="user-display"
+                          class="user-display hidden">
+                    </span>
+
+                    <button id="logout-btn"
+                            class="logout-btn hidden"
+                            type="button">
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Checkout Section -->
+
+    <section id="checkout"
+             class="checkout-section">
+
+        <div class="checkout-container">
+
+            <a href="cart.html"
+               class="back-btn">
+                ← Back to Cart
+            </a>
+
+
+            <div class="checkout-header">
+
+                <h2>Checkout</h2>
+
+                <p>
+                    Complete your details to place your order.
+                </p>
+
+            </div>
+
+
+            <div class="checkout-grid">
+
+
+                <!-- Customer Information -->
+
+                <div class="checkout-form">
+
+                    <h3>
+                        Delivery Information
+                    </h3>
+
+                    <form id="checkout-form">
+
+                        <input
+                            type="text"
+                            id="customer-name"
+                            placeholder="Full Name"
+                            required
+                        >
+
+                        <input
+                            type="email"
+                            id="customer-email"
+                            placeholder="Email Address"
+                            required
+                        >
+
+                        <input
+                            type="tel"
+                            id="customer-phone"
+                            placeholder="Phone Number"
+                            required
+                        >
+
+                        <textarea
+                            id="delivery-address"
+                            placeholder="Delivery Address"
+                            required
+                        ></textarea>
+
+
+                        <h3>
+                            Payment Method
+                        </h3>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="mpesa"
+                                checked
+                            >
+
+                            M-Pesa
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="card"
+                            >
+
+                            Card
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="cash"
+                            >
+
+                            Cash on Delivery
+
+                        </label>
+
+
+                        <button
+                            type="submit"
+                            class="place-order-btn">
+
+                            Place Order
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- Order Summary -->
+
+                <div class="checkout-summary">
+
+                    <h3>
+                        Your Order
+                    </h3>
+
+                    <div id="checkout-items">
+
+                        <!-- Items inserted by JavaScript -->
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <span id="checkout-subtotal">
+                            KSH. 0.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <span id="checkout-delivery">
+                            KSH. 0.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row checkout-total">
+
+                        <strong>
+                            Total
+                        </strong>
+
+                        <strong id="checkout-total">
+                            KSH. 0.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            © 2026 ShopEasy. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEasy | Cart</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            ShopEasy
+        </a>
+
+        <div class="nav-container">
+
+            <button id="menu-toggle" class="menu-toggle">
+                ☰
+            </button>
+
+            <div id="nav-links" class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="cart.html" id="cart-link">
+                Cart 
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count">0</span>
+            </a>
+                <div class="auth-links">
+
+                    <button id="login-btn" class="login-btn">
+                        Login
+                    </button>
+
+                    <button id="register-btn" class="register-btn">
+                        Register
+                    </button>
+
+                    <a href="my-orders.html"
+                       id="my-orders-btn"
+                       class="my-orders-btn hidden">
+                        My Orders
+                    </a>
+
+                    <span id="user-display"
+                          class="user-display hidden">
+                    </span>
+
+                    <button id="logout-btn"
+                            class="logout-btn hidden">
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Cart Section -->
+
+    <section id="cart" class="cart-section">
+
+        <div class="cart-container">
+
+            <div class="cart-header">
+
+                <h2>Shopping Cart</h2>
+
+                <p>
+                    Review your items before checkout.
+                </p>
+
+            </div>
+
+
+            <div id="cart-items" class="cart-items">
+
+                <!-- Cart items will be added by JavaScript -->
+
+            </div>
+
+
+            <div class="cart-summary">
+
+                <div class="summary-row">
+
+                    <span>Subtotal</span>
+
+                    <span id="cart-subtotal">
+                        KSH. 0.00
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Delivery</span>
+
+                    <span id="delivery-fee">
+                        KSH. 200.00
+                    </span>
+
+                </div>
+
+
+                <hr>
+
+
+                <div class="summary-row total-row">
+
+                    <strong>Total</strong>
+
+                    <strong id="cart-total">
+                        KSH. 0.00
+                    </strong>
+
+                </div>
+
+
+                <button id="checkout-btn"
+                        class="checkout-btn">
+
+                    Proceed to Checkout
+
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            © 2026 ShopEasy. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

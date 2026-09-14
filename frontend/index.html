@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy | Online Store</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <a href="#" class="logo">
+            ShopEasy
+        </a>
+
+    <div class="nav-container">
+
+
+        <button id="menu-toggle" class="menu-toggle" >
+            ☰
+        </button>
+
+        <div id="nav-links" class="nav-links">
+
+            <a href="index.html" id="home-link">Home</a>
+
+            <a href="products.html" id="products-link">Products</a>
+
+            <a href="cart.html" id="cart-link">
+                Cart 
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count">0</span>
+            </a>
+
+        <div class="auth-links">
+
+            <button id="login-btn" class="login-btn">
+                Login
+            </button>
+
+            <button id="register-btn" class="register-btn">
+                Register
+            </button>
+
+            <button
+                id="my-orders-btn"
+                class="my-orders-btn hidden">
+                My Orders
+            </button>
+
+            <span id="user-display" class="user-display hidden">
+            </span>
+
+            <button id="logout-btn" class="logout-btn hidden">
+                Logout
+            </button>
+
+
+        </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+            <h1>Shop Smarter, Live Better</h1>
+
+            <p>
+                Discover amazing products at affordable prices.
+            </p>
+
+            <a href="products.html" id="shop-now-btn" class="shop-btn">
+                Shop Now
+            </a>
+        </div>
+
+    </section>
+
+<section id="products" class="products-section">
+
+        <h2>Featured Products</h2>
+
+        <div class="search-container">
+
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Search for a product..."
+            >
+
+        </div>
+
+
+        <div class="categories">
+
+            <button class="category-btn active"
+                    data-category="all">
+                All
+            </button>
+
+            <button class="category-btn"
+                    data-category="electronics">
+                Electronics
+            </button>
+
+            <button class="category-btn"
+                    data-category="computers">
+                Computers
+            </button>
+
+            <button class="category-btn"
+                    data-category="accessories">
+                Accessories
+            </button>
+
+        </div>
+
+
+       <div class="products-container" id="products-container">
+            
+            <p class="products-loading">Loading products...</p>
+        </div>
+
+    </section>
+
+<!-- Order Confirmation Section -->
+ <section id="order-confirmation" class="confirmation-section hidden">
+
+    <div class="confirmation-container">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>Order Confirmed!</h2>
+
+        <p class="confirmation-message">
+            Thank you for shopping with ShopEasy.
+            Your order has been received successfully.
+        </p>
+
+        <div class="order-number">
+            Order Number:
+            <strong id="order-number"></strong>
+        </div>
+
+        <div class="confirmation-details">
+
+            <h3>Order Details</h3>
+
+            <div id="confirmation-items">
+                <!-- Order items inserted by JavaScript -->
+            </div>
+
+            <hr>
+
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="confirmation-subtotal">
+                    $0.00
+                </span>
+            </div>
+
+            <div class="summary-row">
+                <span>Delivery</span>
+                <span id="confirmation-delivery">
+                    $0.00
+                </span>
+            </div>
+
+            <div class="summary-row confirmation-total">
+                <strong>Total</strong>
+                <strong id="confirmation-total">
+                    $0.00
+                </strong>
+            </div>
+
+        </div>
+
+        <div class="customer-confirmation">
+
+            <h3>Customer Information</h3>
+
+            <p>
+                <strong>Name:</strong>
+                <span id="confirmation-name"></span>
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                <span id="confirmation-email"></span>
+            </p>
+
+            <p>
+                <strong>Payment:</strong>
+                <span id="confirmation-payment"></span>
+            </p>
+
+        </div>
+
+        <button
+            id="continue-shopping"
+            class="continue-shopping-btn">
+            Continue Shopping
+        </button>
+
+    </div>
+
+</section>
+<!-- ========================================
+     MY ORDERS SECTION  -->
+
+
+<section
+    id="my-orders-section"
+    class="my-orders-section hidden"
+>
+
+    <div class="my-orders-container">
+
+        <div class="my-orders-header">
+
+            <h2>My Orders</h2>
+
+            <button
+                id="back-from-orders"
+                class="back-orders-btn"
+            >
+                Continue Shopping
+            </button>
+
+        </div>
+
+        <div id="orders-list">
+
+            <p class="orders-loading">
+                Loading your orders...
+            </p>
+
+        </div>
+
+    </div>
+
+    </section>
+
+<!-- ========================================
+     LOGIN SECTION
+======================================== -->
+
+<section id="login-section" class="auth-section hidden">
+
+    <div class="auth-container">
+
+        <button
+            id="close-login"
+            class="close-auth"
+        >
+            ×
+        </button>
+
+        <h2>Welcome Back</h2>
+
+        <p>
+            Login to your ShopEasy account
+        </p>
+
+        <form id="login-form">
+
+            <input
+                type="text"
+                id="login-username"
+                placeholder="Username"
+                required
+            >
+
+            <input
+                type="password"
+                id="login-password"
+                placeholder="Password"
+                required
+            >
+
+            <button
+                type="submit"
+                class="auth-submit-btn"
+            >
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- ========================================
+     REGISTER SECTION
+======================================== -->
+
+<section id="register-section" class="auth-section hidden">
+
+    <div class="auth-container">
+
+        <button
+            id="close-register"
+            class="close-auth"
+        >
+            ×
+        </button>
+
+        <h2>Create Account</h2>
+
+        <p>
+            Join ShopEasy today
+        </p>
+
+        <form id="register-form">
+
+            <input
+                type="text"
+                id="register-username"
+                placeholder="Username"
+                required
+            >
+
+            <input
+                type="email"
+                id="register-email"
+                placeholder="Email Address"
+                required
+            >
+
+            <input
+                type="password"
+                id="register-password"
+                placeholder="Password"
+                required
+            >
+
+            <input
+                type="tel"
+                id="register-phone"
+                placeholder="Phone Number"
+            >
+
+            <textarea
+                id="register-address"
+                placeholder="Address"
+            ></textarea>
+
+            <button
+                type="submit"
+                class="auth-submit-btn"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            © 2026 ShopEasy. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

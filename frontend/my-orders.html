@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEasy | My Orders</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            ShopEasy
+        </a>
+
+        <div class="nav-container">
+
+            <button id="menu-toggle" class="menu-toggle" type="button">
+                ☰
+            </button>
+
+            <div id="nav-links" class="nav-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="products.html">Products</a>
+
+                <a href="cart.html" id="cart-link">
+                Cart 
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count">0</span>
+            </a>
+
+                <div class="auth-links">
+
+                    <a href="login.html"
+                       id="login-btn"
+                       class="login-btn">
+                        Login
+                    </a>
+
+                    <a href="register.html"
+                       id="register-btn"
+                       class="register-btn">
+                        Register
+                    </a>
+
+                    <a href="my-orders.html"
+                       id="my-orders-btn"
+                       class="my-orders-btn">
+                        My Orders
+                    </a>
+
+                    <span id="user-display"
+                          class="user-display hidden">
+                    </span>
+
+                    <button id="logout-btn"
+                            class="logout-btn hidden"
+                            type="button">
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- My Orders -->
+    <section id="my-orders-section" class="my-orders-section">
+
+        <div class="my-orders-container">
+
+            <div class="my-orders-header">
+
+                <div>
+                    <h2>My Orders</h2>
+
+                    <p>
+                        View your previous orders and their status.
+                    </p>
+                </div>
+
+                <a href="products.html"
+                   class="back-orders-btn">
+                    Continue Shopping
+                </a>
+
+            </div>
+
+
+            <!-- Orders will be loaded here -->
+            <div id="orders-list">
+
+                <p class="orders-loading">
+                    Loading your orders...
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            &copy; 2026 ShopEasy. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

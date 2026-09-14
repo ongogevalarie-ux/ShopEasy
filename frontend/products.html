@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEasy | Products</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            ShopEasy
+        </a>
+
+        <div class="nav-container">
+
+            <button id="menu-toggle" class="menu-toggle">
+                ☰
+            </button>
+
+            <div id="nav-links" class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="cart.html" id="cart-link">
+                Cart 
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count">0</span>
+            </a>
+
+                <div class="auth-links">
+
+                    <button id="login-btn" class="login-btn">
+                        Login
+                    </button>
+
+                    <button id="register-btn" class="register-btn">
+                        Register
+                    </button>
+
+                    <a href="my-orders.html"
+                       id="my-orders-btn"
+                       class="my-orders-btn hidden">
+                        My Orders
+                    </a>
+
+                    <span id="user-display"
+                          class="user-display hidden">
+                    </span>
+
+                    <button id="logout-btn"
+                            class="logout-btn hidden">
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Products Section -->
+
+    <section id="products" class="products-section">
+
+        <h2>Featured Products</h2>
+
+        <div class="search-container">
+
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Search for a product..."
+            >
+
+        </div>
+
+
+        <div class="categories">
+
+            <button class="category-btn active"
+                    data-category="all">
+                All
+            </button>
+
+            <button class="category-btn"
+                    data-category="electronics">
+                Electronics
+            </button>
+
+            <button class="category-btn"
+                    data-category="computers">
+                Computers
+            </button>
+
+            <button class="category-btn"
+                    data-category="accessories">
+                Accessories
+            </button>
+
+        </div>
+
+
+       <div class="products-container" id="products-container">
+            
+            <p class="products-loading">Loading products...</p>
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            © 2026 ShopEasy. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
